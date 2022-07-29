@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "article")
+@Table(name = "Articles")
 public class Article {
     
     @Id
@@ -19,7 +19,7 @@ public class Article {
 
     private String nom;
 
-    private Double prixUnitaire;
+    private Float prixUnitaire;
 
     private String libelle;
 

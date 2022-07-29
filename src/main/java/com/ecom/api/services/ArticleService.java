@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Service
 public class ArticleService {
- 
+    
     @Autowired
     private ArticleRepository articleRepository;
 
@@ -30,9 +30,10 @@ public class ArticleService {
     }
 
     public Article saveArticle(Article article){
-        Article articleSaved;
-        articleSaved = articleRepository.save(article);
+        Article savedArticle;
 
-        return articleSaved;
+        savedArticle = articleRepository.save(article);
+
+        return savedArticle;
     }
 }

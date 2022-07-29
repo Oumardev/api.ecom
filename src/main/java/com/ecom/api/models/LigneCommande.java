@@ -10,21 +10,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "lignecommande")
+@Table(name = "LigneCommande")
 public class LigneCommande {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCommande;
 
-    private User idUser;
+    private int idUser;
 
-    private Article idArticle;
+    private int idArticle;
 
     private String date;
 
     private int nbArticle;
 
-    private float TVA;
-
+    private Float TVA;
 }
