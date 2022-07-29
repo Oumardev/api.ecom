@@ -1,0 +1,38 @@
+package com.ecom.api.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecom.api.models.Article;
+import com.ecom.api.repository.ArticleRepository;
+
+import lombok.Data;
+
+@Data
+@Service
+public class ArticleService {
+ 
+    @Autowired
+    private ArticleRepository articleRepository;
+
+    public Optional<Article> getArticle(final int id){
+        return articleRepository.findById(id);
+    }
+
+    public Iterable<Article> getAllArticle(){
+        return articleRepository.findAll();
+    }
+
+    public void deleteArticle(Article article){
+        articleRepository.delete(article);
+    }
+
+    public Article saveArticle(Article article){
+        Article articleSaved;
+        articleSaved = articleRepository.save(article);
+
+        return articleSaved;
+    }
+}
