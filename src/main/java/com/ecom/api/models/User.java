@@ -1,13 +1,15 @@
 package com.ecom.api.models;
 
-import java.util.List;
-
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -26,9 +28,7 @@ public class User {
 
     private String telephone;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "idUser")
-    private List<LigneCommande> ligneCommandes;
-
-    @OneToMany(mappedBy = "idUser")
-    private List<Commentaire> commentaires;
+    private Collection<Commentaire> commentaires;
 }

@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Data
@@ -20,10 +22,12 @@ public class Commentaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCommentaire;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "idUser")
     private User idUser;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "idArticle")
     private Article idArticle;

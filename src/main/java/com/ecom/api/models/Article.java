@@ -1,6 +1,6 @@
 package com.ecom.api.models;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,8 +31,5 @@ public class Article {
     private String libelle;
 
     @OneToMany(mappedBy = "idArticle")
-    private List<LigneCommande> ligneCommandes;
-
-    @OneToMany(mappedBy = "idArticle")
-    private List<Commentaire> commentaires;
+    private Collection<Commentaire> commentaires;
 }
