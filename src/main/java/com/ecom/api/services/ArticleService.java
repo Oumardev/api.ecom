@@ -17,8 +17,8 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public Optional<Article> getArticle(final int id){
-        return articleRepository.findById(id);
+    public Article getArticle(final int id){
+        return articleRepository.findById(id).get();
     }
 
     public Iterable<Article> getAllArticle(){

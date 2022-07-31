@@ -19,8 +19,8 @@ import lombok.Data;
 public class User {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUser;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     private String nom;
 
@@ -28,7 +28,7 @@ public class User {
 
     private String telephone;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "idUser")
+    @JsonBackReference
+    @OneToMany(mappedBy = "user")
     private Collection<Commentaire> commentaires;
 }

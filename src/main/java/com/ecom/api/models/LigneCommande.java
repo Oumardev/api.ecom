@@ -17,16 +17,16 @@ import lombok.Data;
 public class LigneCommande {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCommande;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
-    private User idUser;
+    @JoinColumn(name = "user")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "idArticle")
-    private Article idArticle;
+    @JoinColumn(name = "article")
+    private Article article;
 
     @Column(nullable = false)
     private String date;

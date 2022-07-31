@@ -3,6 +3,7 @@ package com.ecom.api.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/article/{id}")
-    public Optional<Article> getArticle(@PathVariable("id") final int id){
+    public Article getArticle(@PathVariable("id") final int id){
         return articleService.getArticle(id);
     }
 
@@ -34,7 +35,7 @@ public class ArticleController {
         articleService.deleteArticle(article);
     }
 
-    @PostMapping("/article")
+    @PostMapping(value = "/article", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Article saveArticle(@RequestBody Article article){
         Article savedArticle;
 

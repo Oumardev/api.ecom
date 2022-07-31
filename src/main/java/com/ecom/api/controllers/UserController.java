@@ -1,7 +1,5 @@
 package com.ecom.api.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUser(@PathVariable("id") final int id){
+    public User getUser(@PathVariable("id") final int id){
         return userService.getUser(id);
     }
 
@@ -36,9 +34,9 @@ public class UserController {
 
     @PostMapping("/user")
     public User savedUser(@RequestBody User user){
-        User savedUser;
+   
+        User saved = userService.saveUser(user);
 
-        savedUser = userService.saveUser(user);
-        return savedUser;
+        return saved;
     }
 }

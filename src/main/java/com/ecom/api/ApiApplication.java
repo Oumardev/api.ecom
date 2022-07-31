@@ -31,33 +31,6 @@ public class ApiApplication implements CommandLineRunner{
 	public void run(String ...strings) throws Exception{
 	
 		System.out.println("---------- CREATE USER ----------");
-		User user = new User();
-		user.setNom("Backi");
-		user.setDateNaissance("19-11-2000");
-		user.setTelephone("778143610");
-
-		User savedUser = userService.saveUser(user);
-		System.out.println("User created: "+ savedUser);
-
-		System.out.println("---------- CREATE ARTICLE ----------");
-		Article article = new Article();
-		article.setNom("Ecouteur sans fils");
-		article.setPrixUnitaire(Float.parseFloat("1233.34"));
-		article.setLibelle("Des écouteurs sans fils");
-
-		Article savedArticle = articleService.saveArticle(article);
-		System.out.println("Article created: "+ savedArticle);
-
-		System.out.println("---------- CREATE COMMENTAIRE ----------");
-		Commentaire commentaire = new Commentaire();
-		commentaire.setIdArticle(article);
-		commentaire.setIdUser(user);
-		commentaire.setDate("19-11-2000");
-		commentaire.setText("Cet article est vraiment cool");
-
-		Commentaire savedCommentaire = commentaireService.saveCommentaire(commentaire);
-		System.out.println("Commentaire created: "+ savedCommentaire);
-
 	}
 
 

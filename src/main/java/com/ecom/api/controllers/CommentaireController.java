@@ -3,6 +3,7 @@ package com.ecom.api.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,11 +35,10 @@ public class CommentaireController {
         commentaireService.deleteCommentaire(commentaire);
     }
 
-    @PostMapping("/commentaire")
+    @PostMapping(value = "/commentaire", consumes = MediaType.APPLICATION_JSON_VALUE,produces = "application/json")
     public Commentaire saveCommentaire(@RequestBody Commentaire commentaire){
-        Commentaire savedCommentaire;
-
-        savedCommentaire = commentaireService.saveCommentaire(commentaire);
-        return savedCommentaire;
+       
+        Commentaire saved = commentaireService.saveCommentaire(commentaire);
+        return saved;
     }
 }

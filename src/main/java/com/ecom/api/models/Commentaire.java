@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -19,22 +20,21 @@ import lombok.Data;
 public class Commentaire {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCommentaire;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "idUser")
-    private User idUser;
+    @JoinColumn(name = "user")
+    private User user;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "idArticle")
-    private Article idArticle;
+    @JoinColumn(name = "article")
+    private Article article;
 
     @Column(nullable = false)
     private String date;
 
     @Column(nullable = false)
     private String text;
+
 }
