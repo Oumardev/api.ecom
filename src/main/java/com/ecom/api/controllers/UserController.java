@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/user")
     public User savedUser(@Valid @RequestBody User user){
-   
+
         User saved = userService.saveUser(user);
 
         return saved;

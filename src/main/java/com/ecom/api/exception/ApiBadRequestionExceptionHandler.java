@@ -5,14 +5,14 @@ import java.time.ZonedDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ApiBadRequestionExceptionHandler {
     
-    @ExceptionHandler(value = {ApiRequestException.class})
-    public ResponseEntity<Object> handleApiBadRequestException(ApiRequestException e){
+    @ExceptionHandler(value = {NumberFormatException.class})
+    public ResponseEntity<Object> handleApiBadRequestException(NumberFormatException e){
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
         ApiException apiException = new ApiException(
