@@ -1,6 +1,9 @@
 package com.ecom.api.controllers;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecom.api.exception.ApiBadRequestionExceptionHandler;
+import com.ecom.api.exception.ApiRequestException;
 import com.ecom.api.models.User;
 import com.ecom.api.services.UserService;
 
@@ -18,8 +23,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable("id") final int id){
-        return userService.getUser(id);
+    public ResponseEntity<?> getUser(@PathVariable("id") final int id){
+            User user = userService.getUser(id)
+            .orElseThrow(()-> new ApiRequestException("Cet utilisateur n'existe pas"));
+
+            return ResponseEntity.ok(user);
     }
 
     @GetMapping("/user")
@@ -33,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User savedUser(@RequestBody User user){
+    public User savedUser(@Valid @RequestBody User user){
    
         User saved = userService.saveUser(user);
 

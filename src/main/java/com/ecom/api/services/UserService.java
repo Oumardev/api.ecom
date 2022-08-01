@@ -1,5 +1,7 @@
 package com.ecom.api.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUser(final int id){
-        return userRepository.findById(id).get();
+    public Optional<User> getUser(final int id){
+        return userRepository.findById(id);
     }
 
     public Iterable<User> getAllUser(){
