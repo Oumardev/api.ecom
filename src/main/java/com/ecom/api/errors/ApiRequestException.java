@@ -1,4 +1,4 @@
-package com.ecom.api.exception;
+package com.ecom.api.errors;
 
 public class ApiRequestException extends RuntimeException {
     
@@ -6,7 +6,7 @@ public class ApiRequestException extends RuntimeException {
         super(message);
     }
 
-    public ApiRequestException(String message, Throwable cause){
-        super(message,cause);
+    public ApiRequestException(String message,Throwable cause){
+        super(message, cause);
     }
 }

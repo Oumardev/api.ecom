@@ -1,4 +1,4 @@
-package com.ecom.api.exception;
+package com.ecom.api.errors;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -8,22 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
 @ControllerAdvice
 public class ApiNotFoundExceptionHandler {
 
     @ExceptionHandler(value = {ApiRequestException.class})
-    public ResponseEntity<Object> handleApiNotFoundRequestException(ApiRequestException e){
-        // 1. Create payload containing exception details
-        HttpStatus badRequest = HttpStatus.NOT_FOUND;
+    public ResponseEntity<Object> ApiNotFoundException(ApiRequestException e){
+        HttpStatus status = HttpStatus.NOT_FOUND;
 
         ApiException apiException = new ApiException(
             e.getMessage(), 
-            HttpStatus.NOT_FOUND, 
+            status,
             ZonedDateTime.now(ZoneId.of("Z"))
         );
 
-        // 2. Return reponse entity
-        return new ResponseEntity<>(apiException,badRequest);
-    }   
+        return new ResponseEntity<>(apiException,status);
+    }
 }

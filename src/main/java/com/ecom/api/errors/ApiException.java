@@ -1,17 +1,18 @@
-package com.ecom.api.exception;
+package com.ecom.api.errors;
 
 import java.time.ZonedDateTime;
 
 import org.springframework.http.HttpStatus;
 
 public class ApiException {
+
     private final String message;
-    private final HttpStatus HttpStatus;
+    private final HttpStatus httpStatus;
     private final ZonedDateTime timestamp;
 
     public ApiException(String message, HttpStatus httpStatus, ZonedDateTime timestamp){
         this.message = message;
-        this.HttpStatus = httpStatus;
+        this.httpStatus = httpStatus;
         this.timestamp = timestamp;
     }
 
@@ -20,10 +21,10 @@ public class ApiException {
     }
 
     public HttpStatus getHttpStatus(){
-        return this.HttpStatus;
+        return this.httpStatus;
     }
 
-    public ZonedDateTime getDateTime(){
+    public ZonedDateTime getTimeStamp(){
         return this.timestamp;
     }
 }

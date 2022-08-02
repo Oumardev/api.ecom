@@ -1,4 +1,4 @@
-package com.ecom.api.exception;
+package com.ecom.api.errors;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ApiBadRequestionExceptionHandler {
+public class ApiNumberFormatExceptionHandler {
     
     @ExceptionHandler(value = {NumberFormatException.class})
-    public ResponseEntity<Object> handleApiBadRequestException(NumberFormatException e){
-        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+    public ResponseEntity<Object> ApiNumberFormat(NumberFormatException e){
+
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
         ApiException apiException = new ApiException(
             e.getMessage(), 
-            HttpStatus.BAD_REQUEST, 
+            httpStatus, 
             ZonedDateTime.now(ZoneId.of("Z"))
         );
 
-        return new ResponseEntity<>(apiException,badRequest);
+        return new ResponseEntity<>(apiException,httpStatus);
     }
 }

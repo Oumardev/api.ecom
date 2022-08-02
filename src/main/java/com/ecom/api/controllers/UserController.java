@@ -1,4 +1,6 @@
 package com.ecom.api.controllers;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecom.api.exception.ApiRequestException;
+import com.ecom.api.errors.ApiRequestException;
 import com.ecom.api.models.User;
 import com.ecom.api.services.UserService;
 
@@ -22,10 +24,10 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUser(@PathVariable("id") final int id){
-            User user = userService.getUser(id)
-            .orElseThrow(()-> new ApiRequestException("Cet utilisateur n'existe pas"));
+        User savedUser = userService.getUser(id)
+        .orElseThrow(()->new ApiRequestException("Cet utilisateur n'existe pas"));
 
-            return ResponseEntity.ok(user);
+        return ResponseEntity.ok(savedUser);
     }
 
     @GetMapping("/user")
