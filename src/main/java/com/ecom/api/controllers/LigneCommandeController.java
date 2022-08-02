@@ -1,7 +1,5 @@
 package com.ecom.api.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecom.api.errors.ApiRequestException;
 import com.ecom.api.models.LigneCommande;
 import com.ecom.api.services.LigneCommandeService;
 
@@ -21,9 +20,11 @@ public class LigneCommandeController {
     private LigneCommandeService ligneCommandeService;
 
     @GetMapping("/lignecommande/{id}")
-    public Optional<LigneCommande> getLigneCommande(@PathVariable("id") final int id){
+    public ResponseEntity<?> getLigneCommande(@PathVariable("id") final int id){
+        LigneCommande saveLigneCommande = ligneCommandeService.getLigneCommande(id)
+        .orElseThrow(()->new ApiRequestException("Cette commande n'existe pas"));
 
-        return ligneCommandeService.getLigneCommande(id);
+        return ResponseEntity.ok(saveLigneCommande);
     } 
 
     @GetMapping("/lignecommande")
