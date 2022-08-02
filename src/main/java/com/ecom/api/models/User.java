@@ -1,5 +1,6 @@
 package com.ecom.api.models;
 
+import java.sql.Date;
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,10 +29,13 @@ public class User {
     private String nom;
 
     @NotNull(message = "La date de naissance est obligatoire")
-    private String dateNaissance;
+    private Date dateNaissance;
 
     @NotNull(message = "Le numéro de téléphone est obligatoire")
     private String telephone;
+
+    @NotNull(message = "Le mot de passe est obligatoire")
+    private String password;
 
     @JsonBackReference
     @OneToMany(mappedBy = "user")
