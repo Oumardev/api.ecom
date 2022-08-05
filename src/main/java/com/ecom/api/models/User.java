@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -17,16 +18,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Users")
+@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = {"login"}))
 public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull(message = "Le nom est obligatoire")
-    @Size(max = 20,min = 2,message = "Le nom doit etre compris entre 2 et 20 caractères")
-    private String nom;
+    @NotNull(message = "Le login est obligatoire")
+    @Size(max = 10,min = 2,message = "Le login doit etre compris entre 2 et 10 caractères")
+    private String login;
 
     @NotNull(message = "La date de naissance est obligatoire")
     private Date dateNaissance;

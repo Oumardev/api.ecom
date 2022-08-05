@@ -32,12 +32,15 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.cors().and().csrf().disable();
+
         http
         .authorizeHttpRequests((authz) -> authz
-            .antMatchers("/user").permitAll()
-            .antMatchers("/commande").hasRole("ADMIN")
-        )
-        .httpBasic(withDefaults());
+            .antMatchers("/register").permitAll()
+            .antMatchers("/lignecommande").hasRole("ADMIN")
+            .antMatchers("/user").hasRole("ADMIN")
+        ).httpBasic(withDefaults());
         
         return http.build();
     }
