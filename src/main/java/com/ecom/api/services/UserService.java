@@ -1,6 +1,5 @@
 package com.ecom.api.services;
 
-import java.security.SecureRandom;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UserService {
     public User saveUser(User user){
         User userSaved;
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(this.strength, new SecureRandom());
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(this.strength);
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encodedPassword);
@@ -45,12 +44,12 @@ public class UserService {
         return userSaved;
     }
 
-    public Optional<User> searchUserByLogin(String login){
-        return userRepository.findByLogin(login);
+    public User searchUserByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     public boolean compareHashPassword(String inPassword, String userPassword){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(this.strength, new SecureRandom());
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(this.strength);
         
         return bCryptPasswordEncoder.matches(inPassword, userPassword);
     }

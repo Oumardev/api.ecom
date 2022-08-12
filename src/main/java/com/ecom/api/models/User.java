@@ -12,22 +12,30 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = {"login"}))
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull(message = "Le login est obligatoire")
-    @Size(max = 10,min = 2,message = "Le login doit etre compris entre 2 et 10 caractères")
-    private String login;
+    @NotNull(message = "Username est obligatoire")
+    @Size(max = 10,min = 2,message = "Username doit etre compris entre 2 et 10 caractères")
+    private String username;
+
+    @NotNull(message = "Le mot de passe est obligatoire")
+    private String password;
+
+    @NotNull(message = "Le role est obligatoire")
+    private String role;
 
     @NotNull(message = "La date de naissance est obligatoire")
     private Date dateNaissance;
@@ -35,10 +43,12 @@ public class User {
     @NotNull(message = "Le numéro de téléphone est obligatoire")
     private String telephone;
 
-    @NotNull(message = "Le mot de passe est obligatoire")
-    private String password;
+    @Value("${some.key:true}")
+    private boolean enabled;    
 
     @JsonBackReference
     @OneToMany(mappedBy = "user")
     private Collection<Commentaire> commentaires;
+
+    
 }
